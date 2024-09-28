@@ -16,6 +16,7 @@ export interface Song {
   author: string;
   title: string;
   image_path: string;
+  song_path: string;
 }
 
 export interface Product {
@@ -27,6 +28,10 @@ export interface Product {
   metadata?: Stripe.Metadata;
 }
 
+export interface ProductWithPrice extends Product {
+  prices?: Price[];
+}
+
 export interface Price {
   id: string;
   product_id?: string;
@@ -36,6 +41,7 @@ export interface Price {
   currency?: string;
   type?: Stripe.Price.Type;
   interval?: Stripe.Price.Recurring.Interval;
+  interval_count?: number;
   trial_period_days?: number | null;
   metadata?: Stripe.Metadata;
   products?: Product;

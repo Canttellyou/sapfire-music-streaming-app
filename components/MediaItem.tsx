@@ -1,5 +1,6 @@
 "use client";
 import useLoadImage from "@/hooks/useLoadImage";
+import usePlayer from "@/hooks/usePlayer";
 import { Song } from "@/types";
 import Image from "next/image";
 import React from "react";
@@ -10,6 +11,8 @@ interface MediaItemProps {
 }
 
 const MediaItem = ({ data, onClick }: MediaItemProps) => {
+  const player = usePlayer();
+
   const imageUrl = useLoadImage(data);
 
   const handleClick = () => {
@@ -17,7 +20,7 @@ const MediaItem = ({ data, onClick }: MediaItemProps) => {
       return onClick(data.id);
     }
 
-    // TODO: Default turn on player
+    player.setId(data.id);
   };
   return (
     <div
@@ -27,7 +30,7 @@ const MediaItem = ({ data, onClick }: MediaItemProps) => {
       <div className="relative rounded-md min-h-[48px] min-w-[48px] overflow-hidden">
         <Image
           fill
-          src={imageUrl || "/images/liked.png"}
+          src={imageUrl || "/images/liked.jpg"}
           alt="Image"
           className="object-cover"
         />

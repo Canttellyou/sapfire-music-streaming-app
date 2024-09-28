@@ -12,6 +12,10 @@ import PlayButton from "./PlayButton";
 import SongItem from "./SongItem";
 import SearchInput from "./SearchInput";
 import MediaItem from "./MediaItem";
+import LikeButton from "./LikeButton";
+import Player from "./Player";
+import Slider from "./Slider";
+import SubscribeModal from "./SubscribeModal";
 
 export {
   Sidebar,
@@ -28,4 +32,8 @@ export {
   SongItem,
   SearchInput,
   MediaItem,
+  LikeButton,
+  Player,
+  Slider,
+  SubscribeModal,
 };

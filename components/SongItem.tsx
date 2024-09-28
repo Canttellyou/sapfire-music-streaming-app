@@ -25,7 +25,7 @@ const SongItem = ({ data, onClick }: SongItemProps) => {
   "
     >
       <div className="relative aspect-square w-full h-full rounded-md overflow-hidden">
-        <Image src={imagePath || "/images/liked.png"} fill alt="Image" />
+        <Image src={imagePath || "/images/liked.jpg"} fill alt="Image" />
       </div>
       <div className="flex flex-col items-start w-full pt-4 gap-y-1">
         <p className="font-semibold truncate w-full">{data.title}</p>

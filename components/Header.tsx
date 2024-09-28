@@ -11,6 +11,7 @@ import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useUser } from "@/hooks/useUser";
 import { FaUserAlt } from "react-icons/fa";
 import toast from "react-hot-toast";
+import usePlayer from "@/hooks/usePlayer";
 
 interface HeaderProps {
   children: ReactNode;
@@ -18,14 +19,14 @@ interface HeaderProps {
 }
 
 const Header = ({ children, className }: HeaderProps) => {
+  const player = usePlayer();
   const router = useRouter();
   const authModal = useAuthModal();
   const supabaseClient = useSupabaseClient();
   const { user } = useUser();
   const handleLogout = async () => {
     const { error } = await supabaseClient.auth.signOut();
-    // TODO:  Reset any playing songs
-
+    player.reset();
     router.refresh();
 
     if (error) {
@@ -38,7 +39,7 @@ const Header = ({ children, className }: HeaderProps) => {
   return (
     <div
       className={twMerge(
-        `h-fit bg-gradient-to-b from-emerald-800 p-6`,
+        `h-fit bg-gradient-to-b from-[#B72FCF] p-6`,
         className
       )}
     >
@@ -68,12 +69,15 @@ const Header = ({ children, className }: HeaderProps) => {
         <div className="flex justify-between items-center gap-x-4">
           {user ? (
             <div className="flex gap-x-4 items-center">
-              <Button onClick={handleLogout} className="bg-white px-6 py-2">
+              <Button
+                onClick={handleLogout}
+                className="bg-white px-6 py-2 text-black"
+              >
                 Logout
               </Button>
               <Button
                 onClick={() => router.push("/account")}
-                className="bg-white"
+                className="bg-white text-black"
               >
                 <FaUserAlt />
               </Button>
@@ -83,7 +87,7 @@ const Header = ({ children, className }: HeaderProps) => {
               <div>
                 <Button
                   onClick={authModal.onOpen}
-                  className="bg-transparent text-neutral-300 font-medium"
+                  className="bg-transparent text-neutral-300 font-medium "
                 >
                   Sign Up
                 </Button>
@@ -91,7 +95,7 @@ const Header = ({ children, className }: HeaderProps) => {
               <div>
                 <Button
                   onClick={authModal.onOpen}
-                  className="bg-white px-6 py-2 "
+                  className="bg-white px-6 py-2 text-black"
                 >
                   Log in
                 </Button>
