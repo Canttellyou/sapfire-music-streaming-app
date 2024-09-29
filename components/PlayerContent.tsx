@@ -91,16 +91,16 @@ const PlayerContent = ({ song, songUrl }: PlayerContentProps) => {
           <LikeButton songId={song.id} />
         </div>
       </div>
-      <div className="flex md:hidden col-auto w-full justify-end items-center">
+      {/* <div className="flex md:hidden col-auto w-full justify-end items-center">
         <div
           onClick={handlePlay}
           className="h-10 w-10 flex items-center justify-center rounded-full bg-white p-1 cursor-pointer"
         >
           <Icon size={30} className="text-black" />
         </div>
-      </div>
+      </div> */}
       {/* Desktop View */}
-      <div className="hidden md:flex h-full justify-center items-center w-full max-w-[722px] gap-x-6">
+      <div className="flex h-full justify-center items-center w-full max-w-[722px] gap-x-6">
         <AiFillStepBackward
           onClick={onPlayPrevious}
           size={30}

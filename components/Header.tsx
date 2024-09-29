@@ -13,6 +13,9 @@ import { FaUserAlt } from "react-icons/fa";
 import toast from "react-hot-toast";
 import usePlayer from "@/hooks/usePlayer";
 import Link from "next/link";
+import useSubscribeModal from "@/hooks/useSubscribeModal";
+import useUploadModal from "@/hooks/useUploadModal";
+import { AiOutlinePlus } from "react-icons/ai";
 
 interface HeaderProps {
   children: ReactNode;
@@ -22,9 +25,23 @@ interface HeaderProps {
 const Header = ({ children, className }: HeaderProps) => {
   const player = usePlayer();
   const router = useRouter();
+  const subscriptionModal = useSubscribeModal();
   const authModal = useAuthModal();
+  const uploadModal = useUploadModal();
   const supabaseClient = useSupabaseClient();
-  const { user } = useUser();
+  const { user, subscription } = useUser();
+
+  const onClick = () => {
+    if (!user) {
+      return authModal.onOpen();
+    }
+
+    if (!subscription) {
+      return subscriptionModal.onOpen();
+    }
+
+    return uploadModal.onOpen();
+  };
   const handleLogout = async () => {
     const { error } = await supabaseClient.auth.signOut();
     player.reset();
@@ -70,6 +87,9 @@ const Header = ({ children, className }: HeaderProps) => {
               <BiSearch className="text-black" size={20} />
             </button>
           </Link>
+          <button className="rounded-full p-2 bg-white flex items-center justify-center hover:opacity-75 transition">
+            <AiOutlinePlus onClick={onClick} size={20} className="text-black" />
+          </button>
         </div>
         <div className="flex justify-between items-center gap-x-4">
           {user ? (
