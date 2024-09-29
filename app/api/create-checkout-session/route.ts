@@ -36,8 +36,8 @@ export async function POST(request: Request) {
       subscription_data: {
         metadata,
       },
-      success_url: `${getURL()}/account`,
-      cancel_url: `${getURL()}`,
+      success_url: `https://sapfire.vercel.app//account`,
+      cancel_url: `https://sapfire.vercel.app/`,
     });
 
     return NextResponse.json({ sessionId: session.id });
